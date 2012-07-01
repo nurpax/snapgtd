@@ -59,13 +59,33 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
     handleFormSubmit = registerUser "login" "password" >> redirect "/"
 
 
+-- REST API for todo items
+restTodo :: Handler App (AuthManager App) ()
+restTodo = do
+  modifyResponse $ setContentType "application/json"
+  method GET getTodo <|> method PUT saveTodo
+  where
+    getTodo =
+      writeLBS "{ \"id\":\"3\", \"descr\":\"foo\" }"
+
+    saveTodo = return ()
+
+
+restTodoList :: Handler App (AuthManager App) ()
+restTodoList = method GET $ do
+  modifyResponse $ setContentType "application/json"
+  writeLBS "[{ \"id\":\"3\", \"descr\":\"foo\" }, { \"id\":\"4\", \"descr\":\"paskaks\" }]"
+
+
 ------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("/login",    with auth handleLoginSubmit)
-         , ("/logout",   with auth handleLogout)
-         , ("/new_user", with auth handleNewUser)
-         , ("",          serveDirectory "static")
+routes = [ ("/login",     with auth handleLoginSubmit)
+         , ("/logout",    with auth handleLogout)
+         , ("/new_user",  with auth handleNewUser)
+         , ("/todo/:id",  with auth restTodo)
+         , ("/todo/list", with auth restTodoList)
+         , ("",           serveDirectory "static")
          ]
 
 
