@@ -1,10 +1,10 @@
 Name:                snapgtd
 Version:             0.1
-Synopsis:            Project Synopsis Here
-Description:         Project Description Here
+Synopsis:            GTD web app
+Description:         
 License:             AllRightsReserved
-Author:              Author
-Maintainer:          maintainer@example.com
+Author:              Janne Hellsten
+Maintainer:          jjhellst@gmail.com
 Stability:           Experimental
 Category:            Web
 Build-type:          Simple
@@ -32,7 +32,8 @@ Executable snapgtd
     snap-loader-static == 0.9.*,
     text >= 0.11 && < 0.12,
     time >= 1.1 && < 1.5,
-    xmlhtml >= 0.1
+    xmlhtml >= 0.1,
+    snaplet-postgresql-simple >= 0.1 && < 0.2
 
   if flag(development)
     build-depends:
