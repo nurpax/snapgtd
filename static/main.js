@@ -17,10 +17,36 @@ var TodoList = Backbone.Collection.extend({
 window.TodoItemView = Backbone.View.extend({
     tagName:"li",
 
+    events: {
+        "dblclick .view": "edit",
+        "keypress .edit": "updateOnEnter"
+    },
+
     template:_.template($('#tpl-todo-item').html()),
 
-    render:function (eventName) {
+    initialize: function() {
+        this.model.bind('change', this.render, this);
+    },
+
+    edit: function() {
+        this.$el.addClass("editing");
+        this.input.focus();
+    },
+
+    close: function() {
+        var value = this.input.val();
+        if (!value) this.clear();
+        this.model.save({descr: value});
+        this.$el.removeClass("editing");
+    },
+
+    updateOnEnter: function(e) {
+        if (e.keyCode == 13) this.close();
+    },
+
+    render:function () {
         $(this.el).html(this.template(this.model.toJSON()));
+        this.input = this.$('.edit');
         return this;
     }
 
@@ -51,7 +77,7 @@ var AppRouter = Backbone.Router.extend({
         this.todoList = new TodoList();
         this.todoListView = new TodoListView({model:this.todoList});
         this.todoList.fetch();
-        $('#todolist').html(this.todoListView.render().el);
+        $('#todo-list').html(this.todoListView.render().el);
     },
 });
 

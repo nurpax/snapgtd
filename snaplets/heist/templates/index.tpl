@@ -1,14 +1,17 @@
 <apply template="base">
 
 <script type="text/template" id="tpl-todo-item">
-  <a href='#todos/<%= id %>'><%= descr %></a>
+  <div class="view">
+    <label><%= descr %></label>
+  </div>
+  <input class="edit" type="text" value="<%= descr %>" />
 </script>
 
 
   <ifLoggedIn>
     <p>You're logged in as '<loggedInUser/>'</p>
 
-    <div id="todolist" />
+    <div id="todo-list" />
 
     <p><a href="/logout">Logout</a></p>
 

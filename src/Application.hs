@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 ------------------------------------------------------------------------------
@@ -6,6 +7,7 @@
 module Application where
 
 ------------------------------------------------------------------------------
+import Control.Monad.State
 import Data.Lens.Template
 import Snap.Snaplet
 import Snap.Snaplet.Heist
@@ -26,6 +28,8 @@ makeLens ''App
 instance HasHeist App where
     heistLens = subSnaplet heist
 
+instance HasPostgres (Handler b App) where
+    getPostgresState = with db get
 
 ------------------------------------------------------------------------------
 type AppHandler = Handler App App

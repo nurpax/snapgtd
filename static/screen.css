@@ -24,3 +24,33 @@ img {
 #info {
    font-size: 60%;
 }
+
+
+#todo-list li.editing {
+    border-bottom: none;
+    margin-top: -1px;
+    padding: 0;
+}
+
+#todo-list li.editing:last-child {
+    margin-bottom: -1px;
+}
+
+#todo-list li.editing .edit {
+    display: block;
+    width: 444px;
+    padding: 13px 15px 14px 20px;
+    margin: 0;
+}
+
+#todo-list li.editing .view {
+    display: none;
+}
+
+#todo-list li .view label {
+    word-break: break-word;
+}
+
+#todo-list li .edit {
+    display: none;
+}
