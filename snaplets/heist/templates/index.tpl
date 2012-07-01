@@ -11,7 +11,8 @@
   <ifLoggedIn>
     <p>You're logged in as '<loggedInUser/>'</p>
 
-    <div id="todo-list" />
+    <ul id="todo-list">
+    </ul>
 
     <p><a href="/logout">Logout</a></p>
 

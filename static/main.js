@@ -52,10 +52,7 @@ window.TodoItemView = Backbone.View.extend({
 
 });
 
-// Views
 window.TodoListView = Backbone.View.extend({
-    tagName:'ul',
-
     initialize:function () {
         this.model.bind("reset", this.render, this);
     },
