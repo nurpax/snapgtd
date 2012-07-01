@@ -101,4 +101,3 @@ app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     addRoutes routes
     addAuthSplices auth
     return $ App h s d a
-
